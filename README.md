@@ -36,8 +36,9 @@ php artisan serve
 ```
 
 ### Download Postman Files Collection and Environments
-Short URL https://bit.ly/PostmanJKBLC
+Short URL https://bit.ly/PostmanJKBLC </br>
 Or open this link https://drive.google.com/drive/folders/1KcxdX9dqtOIwBMgFmyBCheNTING_q1F2?usp=drive_link
+</br>
 Open your postman, drag and drop the downloads file into your postman
 
 ### ERD
