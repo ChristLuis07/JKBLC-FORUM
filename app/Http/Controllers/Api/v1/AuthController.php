@@ -66,7 +66,7 @@ class AuthController extends Controller
                 "data" => [
                     "token" => $token,
                     "user" => $user
-                ]
+                ] 
             ], Response::HTTP_OK);
         }
 
