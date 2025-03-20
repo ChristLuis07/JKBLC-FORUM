@@ -9,12 +9,15 @@ class Comments extends Model
 {
     protected $guarded = ["id"];
 
-    function users() : BelongsTo {
+    protected $hidden = ["user_id", "post_id"];
+
+    function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    function psost() : BelongsTo {
+    function post(): BelongsTo
+    {
         return $this->belongsTo(Post::class);
     }
-
 }
