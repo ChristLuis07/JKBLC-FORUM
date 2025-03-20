@@ -10,16 +10,18 @@ class Post extends Model
 {
     protected $guarded = ["id"];
 
-    function users(): BelongsTo{
+    function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    function category(): BelongsTo{
+    function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 
-    function comments(): HasMany{
+    function comments(): HasMany
+    {
         return $this->hasMany(Comments::class);
     }
-
 }
