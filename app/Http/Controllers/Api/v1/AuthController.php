@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    function register(Request $request){
+    function register(Request $request)
+    {
         $request->validate([
             'name' => "required",
             'email' => "required|email",
@@ -19,13 +20,13 @@ class AuthController extends Controller
         ]);
 
         $is_exist_email = User::where("email", $request->email)->first();
-        if($is_exist_email){
+        if ($is_exist_email) {
             return response()->json([
                 "message" => "Email already exist"
             ], Response::HTTP_CONFLICT);
         }
 
-        try{
+        try {
             $user = User::create([
                 "name" => $request->name,
                 "email" => $request->email,
@@ -42,15 +43,16 @@ class AuthController extends Controller
                     "user" => $user
                 ]
             ], Response::HTTP_CREATED);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
-               "message" => "Internal Server Error",
-               "error" => $e->getMessage() 
+                "message" => "Internal Server Error",
+                "error" => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    function login(Request $request){
+    function login(Request $request)
+    {
         $request->validate([
             "email" => "required|email",
             "password" => "required"
@@ -58,7 +60,7 @@ class AuthController extends Controller
 
         $user = User::where("email", $request->email)->first();
 
-        if($user && Hash::check($request->password, $user->password)){
+        if ($user && Hash::check($request->password, $user->password)) {
             $token = $user->createToken("auth_token")->plainTextToken;
 
             return response()->json([
@@ -66,7 +68,7 @@ class AuthController extends Controller
                 "data" => [
                     "token" => $token,
                     "user" => $user
-                ] 
+                ]
             ], Response::HTTP_OK);
         }
 
@@ -75,10 +77,11 @@ class AuthController extends Controller
         ], Response::HTTP_UNAUTHORIZED);
     }
 
-    function logout(Request $request){ 
+    function logout(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();
         return response()->json([
             "message" => "Logout successfully"
-        ],Response::HTTP_OK);
+        ], Response::HTTP_OK);
     }
 }
